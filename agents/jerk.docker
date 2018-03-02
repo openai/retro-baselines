@@ -1,0 +1,5 @@
+FROM agent
+
+ADD jerk_agent.py ./agent.py
+
+CMD ["python", "-u", "/root/compo/agent.py"]
