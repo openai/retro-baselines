@@ -8,15 +8,17 @@ import numpy as np
 from baselines.common.atari_wrappers import WarpFrame, FrameStack
 import gym_remote.client as grc
 
-def make_env():
+def make_env(stack=True, scale_rew=True):
     """
     Create an environment with some standard wrappers.
     """
     env = grc.RemoteEnv('tmp/sock')
     env = SonicDiscretizer(env)
-    env = RewardScaler(env)
+    if scale_rew:
+        env = RewardScaler(env)
     env = WarpFrame(env)
-    env = FrameStack(env, 4)
+    if stack:
+        env = FrameStack(env, 4)
     return env
 
 class SonicDiscretizer(gym.ActionWrapper):
@@ -49,3 +51,27 @@ class RewardScaler(gym.RewardWrapper):
     """
     def reward(self, reward):
         return reward * 0.01
+
+class AllowBacktracking(gym.Wrapper):
+    """
+    Use deltas in max(X) as the reward, rather than deltas
+    in X. This way, agents are not discouraged too heavily
+    from exploring backwards if there is no way to advance
+    head-on in the level.
+    """
+    def __init__(self, env):
+        super(AllowBacktracking, self).__init__(env)
+        self._cur_x = 0
+        self._max_x = 0
+
+    def reset(self, **kwargs): # pylint: disable=E0202
+        self._cur_x = 0
+        self._max_x = 0
+        return self.env.reset(**kwargs)
+
+    def step(self, action): # pylint: disable=E0202
+        obs, rew, done, info = self.env.step(action)
+        self._cur_x += rew
+        rew = max(0, self._cur_x - self._max_x)
+        self._max_x = max(self._max_x, self._cur_x)
+        return obs, rew, done, info
