@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-A scripted agent called "Just an Episodic Reward Keeper".
+A scripted agent called "Just Enough Retained Knowledge".
 """
 
 import random
