@@ -1,3 +1,3 @@
-# sonic-baselines
+# retro-baselines
 
-This is a set of baseline algorithms for the [Sonic Contest](https://github.com/openai/retro-challenge).
+This is a set of baseline algorithms for the [Retro Contest](https://github.com/openai/retro-contest).
