@@ -1,4 +1,4 @@
-FROM agent:tensorflow
+FROM openai/retro-agent:tensorflow
 
 # Needed for OpenCV.
 RUN apt-get update && \

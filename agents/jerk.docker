@@ -1,4 +1,4 @@
-FROM agent
+FROM openai/retro-agent:bare
 
 ADD jerk_agent.py ./agent.py
 
