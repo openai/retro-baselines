@@ -18,7 +18,7 @@ import gym_remote.exceptions as gre
 from sonic_util import AllowBacktracking, make_env
 
 def main():
-    """Run PPO until the environment throws an exception."""
+    """Run DQN until the environment throws an exception."""
     env = AllowBacktracking(make_env(stack=False, scale_rew=False))
     env = BatchedFrameStack(BatchedGymEnv([[env]]), num_images=4, concat=False)
     config = tf.ConfigProto()
