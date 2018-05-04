@@ -12,7 +12,6 @@ import numpy as np
 import gym_remote.client as grc
 import gym_remote.exceptions as gre
 
-EMA_RATE = 0.2
 EXPLOIT_BIAS = 0.25
 TOTAL_TIMESTEPS = int(1e6)
 
