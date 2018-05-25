@@ -9,7 +9,7 @@ RUN apt-get update && \
 # so we manually fetch the deps we need.
 RUN . ~/venv/bin/activate && \
     pip install scipy tqdm joblib zmq dill progressbar2 cloudpickle opencv-python && \
-    pip install --no-deps git+https://github.com/openai/baselines.git
+    pip install --no-deps git+https://github.com/openai/baselines.git@24fe3d6576dd8f4cdd5f017805be689d6fa6be8c
 
 # Use the anyrl open source RL framework.
 RUN . ~/venv/bin/activate && \
