@@ -1,3 +1,5 @@
+**Status:** Archive (code is provided as-is, no updates expected)
+
 # retro-baselines
 
 This is a set of baseline algorithms for the [Retro Contest](https://github.com/openai/retro-contest).
